@@ -1,0 +1,31 @@
+package com.gy.nacos;
+
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RefreshScope  //加入@RefreshScope注解，可以使当前类下的配置支持动态更新
+@RestController
+@EnableDiscoveryClient
+@SpringBootApplication
+public class NacosConfigApplication {
+
+    //通过@Value注解，去读取key为nacosconfig的配置的值，并通过/getValue接口返回
+    @Value("${nacos.gy}")
+    private String config;
+
+    public static void main(String[] args) {
+        SpringApplication.run(NacosConfigApplication.class, args);
+    }
+
+    @RequestMapping("/getValue")
+    public String getValue(){
+        return config;
+    }
+
+}

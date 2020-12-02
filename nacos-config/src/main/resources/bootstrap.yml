@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: nacos-gy2   #在nacos中注册的名字（与配置列表的中配置相对应）
+  cloud:  #spring.cloud.nacos.discovery.server-addr 指定注册中心的地址，如果你不需要注册该服务，也可以去掉该项，并删除discovery依赖
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:  # spring.cloud.nacos.config.server-addr指定配置中心的地址
+        server-addr: 127.0.0.1:8848
+        file-extension: yml   #file-extension指定配置中心中配置文件的格式
